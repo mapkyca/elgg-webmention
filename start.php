@@ -48,13 +48,40 @@ elgg_register_event_handler('init', 'system', function() {
                         // Now, parse the response for microformats TODO
                         
                         
+                        
+                        // Mean time, lets see if we can parse some generic bits from the page (similar to pingback)
+                        
+                        // Get title
+                        if (preg_match("/<title>(.*)<\/title>/imsU", $source, $m)) 
+                            $title = $m[1];
+                        
+                        // Get extract (TODO: Do this nicer)
+                        $strpos = strpos($source, $target_url);
+                        if ($strpos!==false)
+                        {
+                            $a = 0;
+                            if ($strpos>300) $a=$strpos-300;
+
+                            $extract = strip_tags(substr($source, $a, 600));
+
+                            if ($extract) {
+                                    $hwp = strlen($extract) / 2;
+                                    $extract = substr($extract, $hwp - 75, 150);
+
+                                    $extract = "..." . trim($extract) . "...";
+                            }
+                        }
+                        
+                        
                         // Finally, we let plugins decide what to do with the webmention
                         if (elgg_trigger_plugin_hook('webmention', 'object', array(
                             'source' => $source_url,
                             'target' => $target_url,
                             'entity' => $object,
-                            'content_raw' => $source,
-                            'content_parsed' => '', //TODO
+                            'source_title' => $title,
+                            'source_extract' => $extract,
+                            'source_content_raw' => $source,
+                            'source_content_parsed' => '', //TODO
                         ), false)) {
                             header('HTTP/1.1 202 Accepted');
                             $return['result'] = 'Webmention was successful!';
