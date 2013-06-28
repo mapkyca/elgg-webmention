@@ -52,8 +52,10 @@ elgg_register_plugin_hook_handler('webmention', 'object', function($hook, $type,
     $source_url = $params['source'];
     $target_url = $params['target'];
     $object = $params['entity'];
-    $content_raw = $params['content_raw']; 
-    $microformat_data = $params['content_parsed'];
+    $title = $params['source_title'];
+    $extract = $params['source_extract'];
+    $content_raw = $params['source_content_raw']; 
+    $microformat_data = $params['source_content_parsed'];
 
     if (elgg_instance_of($object, 'object', 'blog'))
     {
