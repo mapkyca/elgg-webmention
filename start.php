@@ -38,6 +38,8 @@ elgg_register_event_handler('init', 'system', function() {
             // Were I to write Elgg again, I'd have reverse lookups as standard.
             if ($object = elgg_trigger_plugin_hook('getbyurl', 'object', array('url' => $target_url), false))
             {
+                elgg_log("WEBMENTION: Got an object from url GUID:{$object->guid}");
+                
                 // We have a valid target, so now lets fetch it and process it for links and microformats
                 if ($source = file_get_contents($source_url)) {
                 
