@@ -81,7 +81,7 @@ elgg_register_event_handler('init', 'system', function() {
                             'source_title' => $title,
                             'source_extract' => $extract,
                             'source_content_raw' => $source,
-                            'source_content_parsed' => '', //TODO
+                            'source_content_parsed' => elgg_trigger_plugin_hook('parse', 'webmention', array('source' => $source), false)
                         ), false)) {
                             header('HTTP/1.1 202 Accepted');
                             $return['result'] = 'Webmention was successful!';
