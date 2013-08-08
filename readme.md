@@ -74,6 +74,7 @@ Todo
 ----
 
 - [ ] Endpoint to parse source URL for microformats, and handle them accordingly.
+- [ ] CRUD events - update on dupe, delete on HTTP DELETE
 
 See
 ---
