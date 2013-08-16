@@ -58,7 +58,7 @@ elgg_register_event_handler('init', 'system', function() {
                             $title = $m[1];
                         
                         // Get extract (TODO: Do this nicer)
-                        $strpos = strpos($source, $target_url);
+                        /*$strpos = strpos($source, $target_url);
                         if ($strpos!==false)
                         {
                             $a = 0;
@@ -72,7 +72,7 @@ elgg_register_event_handler('init', 'system', function() {
 
                                     $extract = "..." . trim($extract) . "...";
                             }
-                        }
+                        }*/
                         
                         
                         // Finally, we let plugins decide what to do with the webmention
