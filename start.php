@@ -14,6 +14,8 @@
  * @author Marcus Povey <marcus@marcus-povey.co.uk>
  */
 	
+// Include MF2 Parser
+require_once(dirname(__FILE__) . '/vendor/mf2/mf2/Parser.php');
 
 elgg_register_event_handler('init', 'system', function() {
     
@@ -48,7 +50,8 @@ elgg_register_event_handler('init', 'system', function() {
                     if ((in_array($target_url, $matches[0])) && (strpos($http_response_header[0], '4') === false)) {
                      
                         // Now, parse the response for microformats TODO
-                        
+                        $parser = new \mf2\Parser($source);
+                        $mf2 = $parser->parse();
                         
                         
                         // Mean time, lets see if we can parse some generic bits from the page (similar to pingback)
@@ -83,6 +86,7 @@ elgg_register_event_handler('init', 'system', function() {
                             'source_title' => $title,
                             'source_extract' => $extract,
                             'source_content_raw' => $source,
+                            'mf2' => $mf2,
                             'source_content_parsed' => elgg_trigger_plugin_hook('parse', 'webmention', array('source' => $source), false)
                         ), false)) {
                             header('HTTP/1.1 202 Accepted');
