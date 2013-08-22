@@ -73,8 +73,9 @@ elgg_register_plugin_hook_handler('webmention', 'object', function($hook, $type,
 Todo
 ----
 
-- [ ] Endpoint to parse source URL for microformats, and handle them accordingly.
+- [X] Endpoint to parse source URL for microformats, and handle them accordingly.
 - [ ] CRUD events - update on dupe, delete on HTTP DELETE
+- [ ] Only send webmentions to first rel="in-reply-to" link (?)
 
 See
 ---
